@@ -9,7 +9,7 @@ export default class GUIView {
 		this.particlesHitArea = false;
 		this.particlesRandom = 2;
 		this.particlesDepth = 4;
-		this.particlesSize = 1.5;
+		this.particlesSize = 0.5;
 		
 		this.touchRadius = 0.15;
 

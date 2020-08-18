@@ -12,19 +12,13 @@ export default class WebGLView {
 		this.app = app;
 
 		this.samples = [
-			'images/sample-01.png',
-			'images/sample-02.png',
-			'images/sample-03.png',
-			'images/sample-04.png',
-			'images/sample-05.png',
+			'images/pratik-hero.png',
 		];
 
 		this.initThree();
 		this.initParticles();
 		this.initControls();
-
-		const rnd = ~~(Math.random() * this.samples.length);
-		this.goto(rnd);
+		this.goto(0);
 	}
 
 	initThree() {
@@ -62,6 +56,11 @@ export default class WebGLView {
 	}
 
 	draw() {
+		if (this.particles.object3D) {
+			this.particles.object3D.material.uniforms.uRandom.value = 2;
+			this.particles.object3D.material.uniforms.uDepth.value = 5;
+			this.particles.object3D.material.uniforms.uSize.value = 1;
+		}
 		this.renderer.render(this.scene, this.camera);
 	}
 
@@ -70,11 +69,11 @@ export default class WebGLView {
 		// init next
 		if (this.currSample == null) this.particles.init(this.samples[index]);
 		// hide curr then init next
-		else {
-			this.particles.hide(true).then(() => {
-				this.particles.init(this.samples[index]);
-			});
-		}
+		// else {
+		// 	this.particles.hide(true).then(() => {
+		// 		this.particles.init(this.samples[index]);
+		// 	});
+		// }
 
 		this.currSample = index;
 	}
